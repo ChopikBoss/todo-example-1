@@ -22,8 +22,9 @@ const MainView = () => {
     [todos, currentFilter]
   );
 
-  const handleChangeFilter = useCallback((new_filter_value) => {}, []);
-  const handleTodoDelete = useCallback((idx) => {});
+  const handleChangeFilter = useCallback((new_filter_value) => { }, []);
+  const handleTodoDelete = useCallback((idx) => { });
+  const handleTodoEdit = useCallback((idx) => { });
 
   return (
     <Container>
@@ -41,6 +42,7 @@ const MainView = () => {
                 title={t.title}
                 done={t.done}
                 onDelete={handleTodoDelete}
+                onEdit={handleTodoEdit}
               />
             ))}
           </TodoList>

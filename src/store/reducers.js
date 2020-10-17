@@ -1,5 +1,5 @@
 import { act } from "react-dom/test-utils";
-import { ADD_TODO, DELETE_TODO, TOGGLE_TODO, CHANGE_TODO } from "./actions";
+import { ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_TODO, CHANGE_TODO } from "./actions";
 
 export const mainReducer = (
   state = {
@@ -18,7 +18,12 @@ export const mainReducer = (
       return {
         ...state,
         todos: state.todos.filter((_, idx) => idx !== action.payload)
-      }
+      };
+    case EDIT_TODO:
+      return {
+        ...state,
+        todos: [...state.todos, action.payload],
+      };
     case TOGGLE_TODO:
       return {
         ...state,

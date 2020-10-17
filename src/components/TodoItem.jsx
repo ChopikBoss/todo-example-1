@@ -4,14 +4,17 @@ import CN from "classnames";
 import { Button } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
-import {useDispatch} from "react-redux"
-import {deleteTodo, toggleTodo} from "../store/actions"
+import { useDispatch } from "react-redux"
+import { deleteTodo, editTodo, toggleTodo } from "../store/actions"
 import "./TodoItem.scss";
 
 const TodoItem = memo(({ done = false, title, idx }) => {
   const dispatch = useDispatch();
   const handleDeleteClick = () => {
     dispatch(deleteTodo(idx))
+  }
+  const handleEditClick = () => {
+    dispatch(editTodo(idx))
   }
   const handleToggleClick = () => {
     dispatch(toggleTodo(idx))
@@ -29,14 +32,22 @@ const TodoItem = memo(({ done = false, title, idx }) => {
         {done ? (
           <input className="todo_item__input" value={title} />
         ) : (
-          <h1 className="todo_item__title">{title}</h1>
-        )}
+            <h1 className="todo_item__title">{title}</h1>
+          )}
       </div>
+
       <div className="todo_item__right_side">
         <Button color="danger" onClick={handleDeleteClick}>
           <FontAwesomeIcon icon={faTrash} />
         </Button>
       </div>
+
+      <div className="todo_item_edit">
+        <input className="todo_item_edit" value={title} />
+        <Button onClick={handleEditClick}>Edit</Button>
+
+      </div>
+
     </div>
   );
 });
